@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute flex overflow-hidden transition-all duration-100 ease-in-out"
+    class="flex flex-col overflow-hidden transition-all duration-100 ease-in-out"
     :style="getSize()"
   >
     <slot />
