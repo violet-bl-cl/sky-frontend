@@ -1,7 +1,5 @@
 <template>
-  <ResponsiveContainer> </ResponsiveContainer>
+  <div></div>
 </template>
-<script setup lang="ts">
-import ResponsiveContainer from "../components/ResponsiveContainer.vue";
-</script>
+<script setup lang="ts"></script>
 <style lang="scss"></style>

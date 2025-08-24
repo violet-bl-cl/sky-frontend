@@ -1,12 +1,17 @@
 <template>
-  <div class="" :style="getWidthHeight()"></div>
+  <div
+    class="absolute flex overflow-hidden transition-all duration-100 ease-in-out"
+    :style="getSize()"
+  >
+    <slot />
+  </div>
 </template>
 <script setup lang="ts">
-  import {useResponsiveManager} from "../composables/useResponsiveManager.ts";
-  import {onMounted} from "vue";
-  const {getWidthHeight, initializeResponsiveManager} = useResponsiveManager()
-  onMounted(()=>{
-    initializeResponsiveManager()
-  })
+import { useResponsiveManager } from "../composables/useResponsiveManager.ts";
+import { onMounted } from "vue";
+const { getSize, initializeResponsiveManager } = useResponsiveManager();
+onMounted(() => {
+  initializeResponsiveManager();
+});
 </script>
 <style lang=""></style>
