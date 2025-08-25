@@ -26,7 +26,15 @@ export const useResponsiveManager = () => {
     window.addEventListener("orientationchange", updateViewportUnit);
     window.screen.orientation.addEventListener("change", updateViewportUnit);
   };
-
+  const removeResponsiveManager = () => {
+    window.removeEventListener("resize", updateViewportUnit);
+    window.removeEventListener("orientationchange", updateViewportUnit);
+    window.screen.orientation.removeEventListener("change", updateViewportUnit);
+    if (resizeTime) {
+      clearTimeout(resizeTime);
+    }
+    resolution.domElement = null;
+  };
   const updateViewportUnit = () => {
     if (resizeTimer) {
       clearTimeout(resizeTimer);
@@ -61,6 +69,7 @@ export const useResponsiveManager = () => {
   };
   return {
     initializeResponsiveManager,
+    removeResponsiveManager,
     resolution,
     getWidth,
     getHeight,

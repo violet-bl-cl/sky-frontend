@@ -1,16 +1,18 @@
 <script setup lang="ts">
+import Renderer from "./components/Renderer.vue";
 import ResponsiveContainer from "./components/ResponsiveContainer.vue";
 import { useResponsiveManager } from "./composables/useResponsiveManager";
 const { getSize } = useResponsiveManager();
 </script>
 <!--navigate route links will be routed to router view component-->
 <template>
+  <!-- Mobile only -->
   <ResponsiveContainer>
     <div
-      class="bg-[#ff0000] flex justify-end items-end p-5 text-[#ffffff] text-[24px]"
+      class="bg-[#ff0000] flex justify-start text-[#ffffff] text-[24px]"
       :style="getSize()"
     >
-      Page 1
+      <Renderer />
     </div>
   </ResponsiveContainer>
   <ResponsiveContainer>
