@@ -12,7 +12,7 @@ const { getSize } = useResponsiveManager();
   </ResponsiveContainer>
   <ResponsiveContainer>
     <div
-      class="bg-[#2a1ad4] flex justify-end items-end p-5 text-[#ffffff] text-[24px]"
+      class="bg-[#000000] flex justify-end items-end p-5 text-[#ffffff] text-[24px] transition-all duration-300 ease-in-out"
       :style="getSize()"
     >
       Page 2
@@ -20,7 +20,7 @@ const { getSize } = useResponsiveManager();
   </ResponsiveContainer>
   <ResponsiveContainer>
     <div
-      class="bg-[#7eb628] flex justify-end items-end p-5 text-[#ffffff] text-[24px]"
+      class="bg-[#000000] h-full flex justify-end items-end p-5 text-[#ffffff] text-[24px] transition-all duration-300 ease-in-out"
       :style="getSize()"
     >
       Page 3
@@ -28,7 +28,7 @@ const { getSize } = useResponsiveManager();
   </ResponsiveContainer>
   <ResponsiveContainer>
     <div
-      class="bg-[#1ab994] flex justify-end items-end p-5 text-[#ffffff] text-[24px]"
+      class="bg-[#000000] h-full flex justify-end items-end p-5 text-[#ffffff] text-[24px] transition-all duration-300 ease-in-out"
       :style="getSize()"
     >
       Page 4
@@ -36,7 +36,7 @@ const { getSize } = useResponsiveManager();
   </ResponsiveContainer>
   <ResponsiveContainer>
     <div
-      class="bg-[#6d28b6] flex justify-end items-end p-5 text-[#ffffff] text-[24px]"
+      class="bg-[#000000] h-full flex justify-end items-end p-5 text-[#ffffff] text-[24px] transition-all duration-300 ease-in-out"
       :style="getSize()"
     >
       Page 5
@@ -44,7 +44,7 @@ const { getSize } = useResponsiveManager();
   </ResponsiveContainer>
   <ResponsiveContainer>
     <div
-      class="bg-[#d00d95] flex justify-end items-end p-5 text-[#ffffff] text-[24px]"
+      class="bg-[#000000] h-full flex justify-end items-end p-5 text-[#ffffff] text-[24px] transition-all duration-300 ease-in-out"
       :style="getSize()"
     >
       Page 6

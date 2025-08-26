@@ -1,5 +1,6 @@
 import { reactive } from "vue";
-
+import { ScrollTrigger } from "gsap/all";
+import gsap from "gsap";
 const resolution = reactive<{
   innerWidth: number;
   innerHeight: number;
@@ -19,6 +20,7 @@ const resizeTime: number = 40;
 export const useResponsiveManager = () => {
   const initializeResponsiveManager = () => {
     if (!resolution.domElement) {
+      gsap.registerPlugin(ScrollTrigger);
       resolution.domElement = document.querySelector("#app") as HTMLDivElement;
     }
     updateViewportUnit();
@@ -52,6 +54,7 @@ export const useResponsiveManager = () => {
       resolution.innerWidth = vwUnit * 100;
       resolution.domElement.style.setProperty("--vh", `${vhUnit}px`);
       resolution.domElement.style.setProperty("--vw", `${vwUnit}px`);
+      ScrollTrigger.refresh();
     }, resizeTime);
   };
 
