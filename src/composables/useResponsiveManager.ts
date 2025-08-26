@@ -9,11 +9,13 @@ const resolution = reactive<{
     vhUnit: number;
   };
   domElement: HTMLDivElement | null;
+  resize: boolean;
 }>({
   innerWidth: 0,
   innerHeight: 0,
   view: { vwUnit: 0, vhUnit: 0 },
   domElement: null,
+  resize: true,
 });
 let resizeTimer: ReturnType<typeof setTimeout> | null = null;
 const resizeTime: number = 40;
@@ -38,6 +40,9 @@ export const useResponsiveManager = () => {
     resolution.domElement = null;
   };
   const updateViewportUnit = () => {
+    if (!resolution.resize) {
+      return;
+    }
     if (resizeTimer) {
       clearTimeout(resizeTimer);
     }

@@ -2,7 +2,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        myfont: ["MyFont", "sans-serif"],
+        ibm: ["IBM Plex Sans", "sans-serif"],
       },
     },
   },
