@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive } from "vue";
+import { onMounted } from "vue";
 import ResponsiveContainer from "./components/ResponsiveContainer.vue";
 import { useResponsiveManager } from "./composables/useResponsiveManager";
 import Experience from "./view/Experience.vue";
