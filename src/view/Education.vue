@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-[#000000] flex justify-between items-center flex-col text-[#ffffff] text-[24px] experience"
+    class="bg-[#000000] flex justify-between items-center flex-col text-[#ffffff] text-[24px] education"
     :style="getSize()"
   >
     <div
@@ -45,8 +45,8 @@ import Highlight from "../components/Highlight.vue";
 import type { HighLightContent } from "../interface/HighLight";
 const { getSize, resolution } = useResponsiveManager();
 const experienceData: HighLightContent = {
-  mainTitle: "Experience",
-  id: "experience",
+  mainTitle: "Education / Achievement",
+  id: "education",
   sections: [
     {
       role: "Developer",
@@ -69,7 +69,7 @@ const experienceData: HighLightContent = {
   ],
 };
 onMounted(() => {
-  const pageElement = document.querySelector(".experience") as HTMLDivElement;
+  const pageElement = document.querySelector(".education") as HTMLDivElement;
   watchEffect(
     () => {
       const value = resolution.innerHeight;

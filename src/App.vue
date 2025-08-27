@@ -4,6 +4,7 @@ import ResponsiveContainer from "./components/ResponsiveContainer.vue";
 import { useResponsiveManager } from "./composables/useResponsiveManager";
 import Experience from "./view/Experience.vue";
 import Landing from "./view/Landing.vue";
+import Education from "./view/Education.vue";
 const { getSize, resolution } = useResponsiveManager();
 // let scrollTimer: ReturnType<typeof setTimeout> | null = null;
 onMounted(() => {
@@ -20,12 +21,7 @@ onMounted(() => {
     <Experience />
   </ResponsiveContainer>
   <ResponsiveContainer>
-    <div
-      class="bg-[#000000] h-full flex justify-end items-end p-5 text-[#ffffff] text-[24px] transition-all duration-300 ease-in-out"
-      :style="getSize()"
-    >
-      Page 3
-    </div>
+    <Education />
   </ResponsiveContainer>
   <ResponsiveContainer>
     <div

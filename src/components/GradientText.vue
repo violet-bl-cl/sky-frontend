@@ -9,14 +9,16 @@ import { computed } from "vue";
 const props = withDefaults(
   defineProps<{
     gradientColors: { color: string; amount: string }[];
-    fontStyle?: string;
+    fontStyle?: string[];
   }>(),
   {
     gradientColors: () => [
       { color: "#ffffff", amount: "5%" },
       { color: "#ffffff", amount: "10%" },
     ],
-    fontStyle: "font-ibm text-[24px] bg-clip-text text-transparent select-none",
+    fontStyle: () => [
+      "font-ibm text-[24px] bg-clip-text text-transparent select-none",
+    ],
   }
 );
 
