@@ -77,10 +77,12 @@ onMounted(() => {
         pageElement,
         {
           opacity: 0,
+          x: -50,
           y: -50,
         },
         {
           opacity: 1,
+          x: 0,
           y: 0, // optional: move up while fading
           duration: 0.2,
           scrollTrigger: {

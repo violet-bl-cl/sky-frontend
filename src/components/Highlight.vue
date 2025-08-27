@@ -121,20 +121,6 @@ const props = withDefaults(defineProps<{ content: HighLightContent }>(), {
         heading: " <span class='font-semibold'>2025</span> Cureal Limited",
         content: ["• Example 1", "• Example 2", "• Example 3"],
       },
-      {
-        role: "developer",
-        duration:
-          "<span class='font-light'>2025</span> ~ <span class='font-light'>Present</span>",
-        heading: " <span class='font-semibold'>2025</span> Cureal Limited",
-        content: ["• Example 1", "• Example 2", "• Example 3"],
-      },
-      {
-        role: "developer",
-        duration:
-          "<span class='font-light'>2025</span> ~ <span class='font-light'>Present</span>",
-        heading: " <span class='font-semibold'>2025</span> Cureal Limited",
-        content: ["• Example 1", "• Example 2", "• Example 3"],
-      },
     ],
   }),
 });
@@ -154,16 +140,17 @@ onMounted(() => {
         mainTitleElement,
         {
           opacity: 0,
-          y: 40,
+          y: -20,
+          x: -80,
         },
         {
           opacity: 1,
           y: 0,
+          x: 0,
           delay: 1,
           scrollTrigger: {
             trigger: mainTitleElement,
             scrub: true,
-            // markers: true,
             start: `top 80%`,
             end: `top 20%`,
             toggleActions: "play reverse play reverse",
@@ -173,12 +160,13 @@ onMounted(() => {
       highLightElements.forEach((domElemnt, index) => {
         gsap.fromTo(
           domElemnt,
-          { opacity: 0, x: -80 },
+          { opacity: 0, x: -80, y: 40 },
           {
             opacity: 1,
             duration: 0.8,
             delay: 0.3 * index,
             x: 0,
+            y: 0,
             yoyo: true,
             scrollTrigger: {
               trigger: domElemnt,

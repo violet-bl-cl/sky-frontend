@@ -34,7 +34,7 @@
                   { color: '#59d5ff', amount: '95%' },
                 ]"
                 :font-style="[
-                  'font-ibm font-bold text-[32px] bg-clip-text text-transparent opacity-0 gradient-text',
+                  'font-ibm font-semibold text-[32px] bg-clip-text text-transparent opacity-0 gradient-text',
                 ]"
                 :data-delay="1"
               >
@@ -89,7 +89,9 @@
           ]"
           :font-style="'font-ibm font-extralight text-[24px] bg-clip-text text-transparent swipe-down'"
         >
-          Swipe <span class="font-semibold">up</span> to view
+          <span class="font-extralight"
+            >Swipe <span class="font-semibold">up</span> to view</span
+          >
         </GradientText>
       </Transition>
     </div>
@@ -155,11 +157,6 @@ onMounted(() => {
   const gradientElements = document.querySelectorAll(
     ".gradient-text"
   ) as any as HTMLDivElement[];
-  setTimeout(() => {
-    pageElement.classList.add("transition-all");
-    pageElement.classList.add("duration-500");
-    pageElement.classList.add("ease-in-out");
-  }, 300);
 
   watchEffect(
     () => {
@@ -172,8 +169,8 @@ onMounted(() => {
           y: 0, // optional: move up while fading
           duration: 0.2,
           scrollTrigger: {
+            // markers: true,
             trigger: pageElement,
-            markers: false,
             start: `top bottom`, // element enters viewport bottom
             end: `bottom top`, // element reaches top
             scrub: true, // smooth scroll-linked animation
@@ -196,14 +193,12 @@ onMounted(() => {
           filter: "brightness(1)",
           y: 3,
           duration: 1.5,
-          // repeat: repeat.value,
           yoyo: true,
           ease: "power1.inOut",
           scrollTrigger: {
             scrub: true,
-            // markers: true,
             trigger: targetElement,
-            start: `top 80%`,
+            start: `top 70%`,
             end: `100% 30%`,
             toggleActions: "play reverse play reverse", // play on enter down, reset when leaving
           },
@@ -215,12 +210,12 @@ onMounted(() => {
         const duration = parseFloat(targetElement.dataset.delay ?? "1");
         gsap.fromTo(
           targetElement,
-          { opacity: 0, y: 40, delay: 0.3 * duration },
+          { opacity: 0, y: 40, delay: 0.3 * duration, filter: "brightness(1)" },
           {
             opacity: 1,
             y: 0,
             duration: 0.25 * duration,
-
+            filter: "brightness(1.3)",
             scrollTrigger: {
               trigger: targetElement,
               start: `top 80%`,
