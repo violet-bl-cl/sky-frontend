@@ -49,16 +49,14 @@ const experienceData: HighLightContent = {
   id: "education",
   sections: [
     {
-      role: "Developer",
-      duration: "April to Oct",
-      heading: "2025 Cureal Limited",
-      content: ["Hello Developer", "hello wolrd", "hello"],
-    },
-    {
-      role: "Developer",
-      duration: "April to Oct",
-      heading: "2025 Cureal Limited",
-      content: ["Hello Developer", "hello wolrd", "hello"],
+      role: "Backend Developer",
+      duration: "Sep 2023 - Sep 2023",
+      heading: "2023 Govhack Hackathon",
+      content: [
+        "- Reducing Carbon Emissions in HouseHolds - Sponsored By InfoSys",
+        "- Hackathon Winner 2023",
+        "Link: ",
+      ],
     },
     {
       role: "Developer",

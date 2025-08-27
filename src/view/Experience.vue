@@ -49,25 +49,26 @@ const experienceData: HighLightContent = {
   id: "experience",
   sections: [
     {
-      role: "Developer",
-      duration: "April to Oct",
-      heading: "2025 Cureal Limited",
-      content: ["Hello Developer", "hello wolrd", "hello"],
+      role: "Full Stack Engineer",
+      duration: "Jan 2025 - Present",
+      heading: "2025 -Cureal Limited-",
+      content: ["Sprint Boot", "Java", "TypeScript"],
     },
     {
-      role: "Developer",
-      duration: "April to Oct",
-      heading: "2025 Cureal Limited",
-      content: ["Hello Developer", "hello wolrd", "hello"],
+      role: "Graphic Engineer",
+      duration: "Dec 2024 - Jan 2025",
+      heading: "",
+      content: ["OpenGL", "Three Js", "3d Engine"],
     },
     {
-      role: "Developer",
-      duration: "April to Oct",
-      heading: "2025 Cureal Limited",
-      content: ["Hello Developer", "hello wolrd", "hello"],
+      role: "Frontend Developer",
+      duration: "Jul 2024 - present",
+      heading: "2025 Be He(a)rd",
+      content: ["React", "Enterepenuship", "Redux"],
     },
   ],
 };
+
 onMounted(() => {
   const pageElement = document.querySelector(".experience") as HTMLDivElement;
   watchEffect(

@@ -1,10 +1,10 @@
 <template>
   <div
-    class="bg-[#000000] flex justify-between items-center flex-col text-[#ffffff] text-[24px] project"
+    class="bg-[#000000] flex justify-between items-center flex-col text-[#ffffff] text-[24px] relative project"
     :style="getSize()"
   >
     <div
-      class="relative h-[30%] w-full flex justify-center items-center flex-col"
+      class="relative h-[40%] w-full flex justify-center items-center flex-col"
       :style="{ border: '1px black solid' }"
     >
       <div
@@ -31,18 +31,59 @@
       </div>
       <Renderer class="z-10" />
     </div>
-    <div
-      class="relative h-[70%] w-full flex justify-center items-center flex-col"
-      :style="{ border: '1px black solid' }"
-    ></div>
+    <div class="flex absolute h-full w-full justify-center items-center">
+      <SlideView :content="slideData.content" />
+    </div>
   </div>
 </template>
 <script setup lang="ts">
 import { useResponsiveManager } from "../composables/useResponsiveManager";
 import Renderer from "../components/Renderer.vue";
 import gsap from "gsap";
-import { onMounted, watchEffect } from "vue";
+import { onMounted, ref, watchEffect } from "vue";
+import SlideView from "../components/SlideView.vue";
+import image from "@/assets/sample.jpeg";
 const { getSize, resolution } = useResponsiveManager();
+const slideData = ref({
+  content: [
+    {
+      project: {
+        url: image,
+        date: "April 2025 ~ April 2024",
+        title: "Project Example 1",
+        paragraph: "This is project X, All about stellar blade.",
+        content: ["Example1", "Example2", "Example3"],
+      },
+    },
+    {
+      project: {
+        url: image,
+        date: "April 2025 ~ April 2024",
+        title: "Project Example 2",
+        paragraph: "This is project X, All about stellar blade.",
+        content: ["Example1", "Example2", "Example3"],
+      },
+    },
+    {
+      project: {
+        url: image,
+        date: "April 2025 ~ April 2024",
+        title: "Project Example 3",
+        paragraph: "This is project X, All about stellar blade.",
+        content: ["Example1", "Example2", "Example3"],
+      },
+    },
+    {
+      project: {
+        url: image,
+        date: "April 2025 ~ April 2024",
+        title: "Project Example 4",
+        paragraph: "This is project X, All about stellar blade.",
+        content: ["Example1", "Example2", "Example3"],
+      },
+    },
+  ],
+});
 onMounted(() => {
   const pageElement = document.querySelector(".project") as HTMLDivElement;
   watchEffect(
@@ -59,7 +100,7 @@ onMounted(() => {
           opacity: 1,
           x: 0,
           y: 0, // optional: move up while fading
-          duration: 0.2,
+          duration: 0.5,
           scrollTrigger: {
             trigger: pageElement,
             start: `50% 100%`, // element enters viewport bottom

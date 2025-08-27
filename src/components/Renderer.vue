@@ -6,6 +6,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import image from "@asset/sample.jpeg";
+import image from "@asset/test.jpg";
 </script>
-<style lang=""></style>
+<style lang="scss" scoped></style>

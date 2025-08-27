@@ -6,7 +6,7 @@
       { color: '#5A5A5A', amount: '95%' },
     ]"
     :font-style="[
-      'ml-[40px] font-ibm font-extralight text-[24px] bg-clip-text text-transparent',
+      'ml-[40px] font-display font-semibold text-[24px] bg-clip-text text-transparent',
       `main-title-${props.content.id}`,
     ]"
     :style="{ filter: 'brightness(2)' }"
@@ -54,7 +54,7 @@
         { color: '#5A5A5A', amount: '95%' },
       ]"
       :font-style="[
-        'font-ibm font-light text-[24px] bg-clip-text text-transparent swipe-down',
+        'font-display font-light text-[24px] bg-clip-text text-transparent swipe-down',
       ]"
       :style="{ filter: 'brightness(2)' }"
       v-html="value.heading"
@@ -68,7 +68,7 @@
           { color: '#5A5A5A', amount: '95%' },
         ]"
         :font-style="[
-          'font-ibm font-extralight text-[16px] bg-clip-text text-transparent swipe-down',
+          'font-display font-extralight text-[16px] bg-clip-text text-transparent swipe-down',
         ]"
         :style="{ filter: 'brightness(2)' }"
         v-html="value.duration"
@@ -90,7 +90,7 @@
     </div>
     <div
       v-for="(phase, index) in value.content"
-      class="text-[12px] font-extralight"
+      class="text-[12px] font-light font-display"
       v-bind:key="index"
     >
       {{ phase }}
@@ -107,8 +107,6 @@ import { useResponsiveManager } from "../composables/useResponsiveManager";
 import { ScrollTrigger } from "gsap/all";
 
 const { resolution } = useResponsiveManager();
-// const { getTransitionClasses } = useTransition();
-// const crossFadeTransition = getTransitionClasses("CrossFade")?.transition;
 const props = withDefaults(defineProps<{ content: HighLightContent }>(), {
   content: () => ({
     mainTitle: "Example",

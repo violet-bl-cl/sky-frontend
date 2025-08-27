@@ -19,7 +19,7 @@
                   { color: '#ffffff', amount: '95%' },
                 ]"
                 :font-style="[
-                  'text-[32px] bold bg-clip-text text-transparent opacity-0 gradient-text',
+                  'font-display text-[32px] bold bg-clip-text text-transparent opacity-0 gradient-text z-40',
                 ]"
                 :data-delay="1"
               >
@@ -34,7 +34,7 @@
                   { color: '#59d5ff', amount: '95%' },
                 ]"
                 :font-style="[
-                  'font-ibm font-semibold text-[32px] bg-clip-text text-transparent opacity-0 gradient-text',
+                  'font-display font-semibold text-[32px] bg-clip-text text-transparent opacity-0 gradient-text z-40',
                 ]"
                 :data-delay="1"
               >
@@ -46,12 +46,12 @@
             <Transition appear @enter="enter" @before-enter="beforeEnter">
               <GradientText
                 :gradient-colors="[
-                  { color: '#103846', amount: '2%' },
-                  { color: '#ffffff', amount: '45%' },
+                  { color: '#103846', amount: '5%' },
+                  { color: '#ffffff', amount: '55%' },
                   { color: '#ffffff', amount: '95%' },
                 ]"
                 :font-style="[
-                  'font-ibm font-extralight   text-[12px] bg-clip-text text-transparent gradient-text',
+                  'font-display font-regular   text-[16px] bg-clip-text text-transparent gradient-text z-40',
                 ]"
                 :data-delay="3"
               >
@@ -87,7 +87,7 @@
             { color: '#5A5A5A', amount: '65%' },
             { color: '#5A5A5A', amount: '95%' },
           ]"
-          :font-style="'font-ibm font-extralight text-[24px] bg-clip-text text-transparent swipe-down'"
+          :font-style="'font-display font-extralight text-[24px] bg-clip-text text-transparent swipe-down'"
         >
           <span class="font-extralight"
             >Swipe <span class="font-semibold">up</span> to view</span
@@ -142,7 +142,7 @@ const swipeOnEnter = (el: Element, done: () => void) => {
     { opacity: 0, filter: "brightness(1)", y: 3 },
     {
       opacity: 1,
-      filter: "brightness(1.8)",
+      filter: "brightness(2)",
       y: 0,
       duration: 1.5,
       // repeat: -1,
@@ -192,7 +192,7 @@ onMounted(() => {
           opacity: 0,
           filter: "brightness(1)",
           y: 3,
-          duration: 1.5,
+          // duration: 1.5,
           yoyo: true,
           ease: "power1.inOut",
           scrollTrigger: {
@@ -215,7 +215,7 @@ onMounted(() => {
             opacity: 1,
             y: 0,
             duration: 0.25 * duration,
-            filter: "brightness(1.3)",
+            filter: "brightness(1.8)",
             scrollTrigger: {
               trigger: targetElement,
               start: `top 80%`,

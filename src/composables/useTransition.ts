@@ -4,8 +4,8 @@ export const useTransition = () => {
   const TRANSITION_DEFENITION: Transition[] = [
     {
       transition: {
-        enterActiveClass: "transition-opacity duration-300 ease-out",
-        leaveActiveClass: "transition-opacity duration-300 ease-out",
+        enterActiveClass: "transition-opacity duration-500 ease-in-out",
+        leaveActiveClass: "transition-opacity duration-500 ease-in-out",
         enterFromClass: "opacity-0",
         leaveFromClass: "opacity-100",
         enterToClass: "opacity-100",
