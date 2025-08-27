@@ -84,16 +84,14 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref, watchEffect, onBeforeUnmount } from "vue";
+import { onMounted, ref, watchEffect, onBeforeUnmount, nextTick } from "vue";
 import { useTransition } from "../composables/useTransition";
 import type { SlideContent } from "../interface/SlideContent";
 import GradientText from "./GradientText.vue";
 import gsap from "gsap";
 import image from "@/assets/sample.jpeg";
-import { useResponsiveManager } from "../composables/useResponsiveManager";
 const { getTransitionClasses } = useTransition();
 const crossFadeTransition = getTransitionClasses("CrossFade")?.transition;
-const { resolution } = useResponsiveManager();
 const currentIndex = ref(0);
 let touchStartX = 0;
 let touchStartY = 0;
@@ -164,29 +162,30 @@ onMounted(() => {
   });
   watchEffect(
     () => {
-      const height = resolution.innerHeight;
       const slideElement = document.querySelector(
         ".slide-show"
       ) as HTMLDivElement;
-      gsap.fromTo(
-        slideElement,
-        { opacity: 0, y: -30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          delay: 0.5,
-          yoyo: true,
-          scrollTrigger: {
-            trigger: slideElement,
-            // markers: true,
-            // scrub: true,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play reset play reset",
-          },
-        }
-      );
+      nextTick(() => {
+        gsap.fromTo(
+          slideElement,
+          { opacity: 0, y: -30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            delay: 0.5,
+            yoyo: true,
+            scrollTrigger: {
+              trigger: slideElement,
+              // markers: true,
+              // scrub: true,
+              start: "top 80%",
+              end: "bottom 20%",
+              toggleActions: "play reset play reset",
+            },
+          }
+        );
+      });
     },
     { flush: "post" }
   );

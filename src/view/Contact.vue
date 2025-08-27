@@ -41,35 +41,35 @@
 import { useResponsiveManager } from "../composables/useResponsiveManager";
 import Renderer from "../components/Renderer.vue";
 import gsap from "gsap";
-import { onMounted, watchEffect } from "vue";
-const { getSize, resolution } = useResponsiveManager();
-
+import { onMounted, watchEffect, nextTick } from "vue";
+const { getSize } = useResponsiveManager();
 onMounted(() => {
   const pageElement = document.querySelector(".contact") as HTMLDivElement;
   watchEffect(
     () => {
-      const value = resolution.innerHeight;
-      gsap.fromTo(
-        pageElement,
-        {
-          opacity: 0,
-          y: -50,
-          x: -50,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          y: 0, // optional: move up while fading
-          duration: 0.2,
-          scrollTrigger: {
-            trigger: pageElement,
-            start: `50% 100%`, // element enters viewport bottom
-            end: `50% 50%`, // element reaches top
-            scrub: true, // smooth scroll-linked animation
-            toggleActions: "play reverse play reverse", // play on enter down, reset when leaving
+      nextTick(() => {
+        gsap.fromTo(
+          pageElement,
+          {
+            opacity: 0,
+            y: -50,
+            x: -50,
           },
-        }
-      );
+          {
+            opacity: 1,
+            x: 0,
+            y: 0, // optional: move up while fading
+            duration: 0.2,
+            scrollTrigger: {
+              trigger: pageElement,
+              start: `50% 100%`, // element enters viewport bottom
+              end: `50% 50%`, // element reaches top
+              scrub: true, // smooth scroll-linked animation
+              toggleActions: "play reverse play reverse", // play on enter down, reset when leaving
+            },
+          }
+        );
+      });
     },
     { flush: "post" }
   );

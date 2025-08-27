@@ -37,13 +37,13 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { onMounted, watchEffect } from "vue";
+import { onMounted, watchEffect, nextTick } from "vue";
 import gsap from "gsap";
 import Renderer from "../components/Renderer.vue";
 import { useResponsiveManager } from "../composables/useResponsiveManager";
 import Highlight from "../components/Highlight.vue";
 import type { HighLightContent } from "../interface/HighLight";
-const { getSize, resolution } = useResponsiveManager();
+const { getSize } = useResponsiveManager();
 const experienceData: HighLightContent = {
   mainTitle: "Experience",
   id: "experience",
@@ -73,28 +73,29 @@ onMounted(() => {
   const pageElement = document.querySelector(".experience") as HTMLDivElement;
   watchEffect(
     () => {
-      const value = resolution.innerHeight;
-      gsap.fromTo(
-        pageElement,
-        {
-          opacity: 0,
-          y: -50,
-          x: -50,
-        },
-        {
-          opacity: 1,
-          y: 0, // optional: move up while fading
-          x: 0,
-          duration: 0.2,
-          scrollTrigger: {
-            trigger: pageElement,
-            start: `50% 100%`, // element enters viewport bottom
-            end: `50% 50%`, // element reaches top
-            scrub: true, // smooth scroll-linked animation
-            toggleActions: "play reverse play reverse", // play on enter down, reset when leaving
+      nextTick(() => {
+        gsap.fromTo(
+          pageElement,
+          {
+            opacity: 0,
+            y: -50,
+            x: 50,
           },
-        }
-      );
+          {
+            opacity: 1,
+            y: 0, // optional: move up while fading
+            x: 0,
+            duration: 0.2,
+            scrollTrigger: {
+              trigger: pageElement,
+              start: `50% 100%`, // element enters viewport bottom
+              end: `50% 50%`, // element reaches top
+              scrub: true, // smooth scroll-linked animation
+              toggleActions: "play reverse play reverse", // play on enter down, reset when leaving
+            },
+          }
+        );
+      });
     },
     { flush: "post" }
   );

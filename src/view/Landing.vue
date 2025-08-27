@@ -11,7 +11,7 @@
       >
         <div class="flex flex-col justify-center items-center">
           <div class="flex flex-row gap-2">
-            <Transition appear @enter="enter" @before-enter="beforeEnter">
+            <Transition appear @before-enter="beforeEnter">
               <GradientText
                 :gradient-colors="[
                   { color: '#103846', amount: '5%' },
@@ -26,7 +26,7 @@
                 Hi, I'm
               </GradientText>
             </Transition>
-            <Transition appear @enter="enter" @before-enter="beforeEnter">
+            <Transition appear @before-enter="beforeEnter">
               <GradientText
                 :gradient-colors="[
                   { color: '#103846', amount: '5%' },
@@ -43,7 +43,7 @@
             </Transition>
           </div>
           <div>
-            <Transition appear @enter="enter" @before-enter="beforeEnter">
+            <Transition appear @before-enter="beforeEnter">
               <GradientText
                 :gradient-colors="[
                   { color: '#103846', amount: '5%' },
@@ -98,34 +98,14 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, Transition, watchEffect } from "vue";
+import { onMounted, Transition, watchEffect, nextTick } from "vue";
 import GradientText from "@components/GradientText.vue";
 import Renderer from "@components/Renderer.vue";
-import { useResponsiveManager } from "../composables/useResponsiveManager";
 import gsap from "gsap";
-const { resolution } = useResponsiveManager();
 // const isGradientInit = ref(false);
 const beforeEnter = (el: Element) => {
   const targetElement = el as HTMLDivElement;
   gsap.to(targetElement, { opacity: 0, duration: 0.1, y: 40 });
-};
-const enter = (el: Element, done: () => void) => {
-  // const targetElement = el as HTMLDivElement;
-  // const duration = parseFloat(targetElement.dataset.delay ?? "1");
-  // gsap.to(targetElement, {
-  //   opacity: 1,
-  //   duration: 0.5,
-  //   delay: 0.2 * duration,
-  //   y: 0,
-  //   onComplete: () => {
-  //     done();
-  //     setTimeout(() => {
-  //       if (!isGradientInit.value) {
-  //         isGradientInit.value = true;
-  //       }
-  //     }, 500);
-  //   },
-  // });
 };
 const swipeOnBeforeEnter = (el: Element) => {
   const targetElement = el as HTMLDivElement;
@@ -158,72 +138,76 @@ onMounted(() => {
     ".gradient-text"
   ) as any as HTMLDivElement[];
 
+  const targetElement = document.querySelector(".swipe-down") as HTMLDivElement;
   watchEffect(
     () => {
-      const value = resolution.innerHeight;
-      gsap.fromTo(
-        pageElement,
-        { opacity: 0, y: -50 },
-        {
-          opacity: 1,
-          y: 0, // optional: move up while fading
-          duration: 0.2,
-          scrollTrigger: {
-            // markers: true,
-            trigger: pageElement,
-            start: `top bottom`, // element enters viewport bottom
-            end: `bottom top`, // element reaches top
-            scrub: true, // smooth scroll-linked animation
-            toggleActions: "play reverse play reverse", // play on enter down, reset when leaving
-          },
-        }
-      );
-
-      const targetElement = document.querySelector(
-        ".swipe-down"
-      ) as HTMLDivElement;
-      gsap.fromTo(
-        targetElement,
-        {
-          opacity: 1,
-          filter: "brightness(1.8)",
-        },
-        {
-          opacity: 0,
-          filter: "brightness(1)",
-          y: 3,
-          // duration: 1.5,
-          yoyo: true,
-          ease: "power1.inOut",
-          scrollTrigger: {
-            scrub: true,
-            trigger: targetElement,
-            start: `top 70%`,
-            end: `100% 30%`,
-            toggleActions: "play reverse play reverse", // play on enter down, reset when leaving
-          },
-        }
-      );
-
-      gradientElements.forEach((element) => {
-        const targetElement = element;
-        const duration = parseFloat(targetElement.dataset.delay ?? "1");
+      nextTick(() => {
         gsap.fromTo(
-          targetElement,
-          { opacity: 0, y: 40, delay: 0.3 * duration, filter: "brightness(1)" },
+          pageElement,
+          { opacity: 0, y: -50 },
           {
             opacity: 1,
-            y: 0,
-            duration: 0.25 * duration,
-            filter: "brightness(1.8)",
+            y: 0, // optional: move up while fading
+            duration: 0.2,
             scrollTrigger: {
-              trigger: targetElement,
-              start: `top 80%`,
-              end: `top 20%`,
+              // markers: true,
+              trigger: pageElement,
+              start: `top bottom`, // element enters viewport bottom
+              end: `bottom top`, // element reaches top
+              scrub: true, // smooth scroll-linked animation
               toggleActions: "play reverse play reverse", // play on enter down, reset when leaving
             },
           }
         );
+
+        gsap.fromTo(
+          targetElement,
+          {
+            opacity: 1,
+            filter: "brightness(1.8)",
+          },
+          {
+            opacity: 0,
+            filter: "brightness(1)",
+            y: 3,
+            // duration: 1.5,
+            yoyo: true,
+            ease: "power1.inOut",
+            scrollTrigger: {
+              scrub: true,
+              trigger: targetElement,
+              start: `top 70%`,
+              end: `100% 30%`,
+              toggleActions: "play reverse play reverse", // play on enter down, reset when leaving
+            },
+          }
+        );
+
+        gradientElements.forEach((element) => {
+          const targetElement = element;
+          const duration = parseFloat(targetElement.dataset.delay ?? "1");
+          gsap.fromTo(
+            targetElement,
+            {
+              opacity: 0,
+              y: 40,
+              delay: 0.3 * duration,
+              filter: "brightness(1)",
+            },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.25 * duration,
+              filter: "brightness(1.8)",
+              scrollTrigger: {
+                trigger: targetElement,
+                start: `top 80%`,
+                end: `top 20%`,
+                toggleActions: "play reverse play reverse", // play on enter down, reset when leaving
+              },
+            }
+          );
+        });
       });
     },
     { flush: "post" }

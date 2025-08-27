@@ -99,14 +99,12 @@
   <!-- </transition-group> -->
 </template>
 <script setup lang="ts">
-import { onMounted, watchEffect } from "vue";
+import { onMounted, watchEffect, nextTick } from "vue";
 import type { HighLightContent } from "../interface/HighLight";
 import GradientText from "./GradientText.vue";
 import gsap from "gsap";
-import { useResponsiveManager } from "../composables/useResponsiveManager";
 import { ScrollTrigger } from "gsap/all";
 
-const { resolution } = useResponsiveManager();
 const props = withDefaults(defineProps<{ content: HighLightContent }>(), {
   content: () => ({
     mainTitle: "Example",
@@ -125,55 +123,56 @@ const props = withDefaults(defineProps<{ content: HighLightContent }>(), {
 onMounted(() => {
   watchEffect(
     () => {
-      const height = resolution.innerHeight;
       const highLightElements = document.querySelectorAll(
         `.high-light-${props.content.id}`
       ) as any as HTMLDivElement[];
       const mainTitleElement = document.querySelector(
         `.main-title-${props.content.id}`
       ) as HTMLDivElement;
-      ScrollTrigger.refresh();
+      nextTick(() => {
+        ScrollTrigger.refresh();
 
-      gsap.fromTo(
-        mainTitleElement,
-        {
-          opacity: 0,
-          y: -20,
-          x: -80,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          x: 0,
-          delay: 1,
-          scrollTrigger: {
-            trigger: mainTitleElement,
-            scrub: true,
-            start: `top 80%`,
-            end: `top 20%`,
-            toggleActions: "play reverse play reverse",
-          },
-        }
-      );
-      highLightElements.forEach((domElemnt, index) => {
         gsap.fromTo(
-          domElemnt,
-          { opacity: 0, x: -80, y: 40 },
+          mainTitleElement,
+          {
+            opacity: 0,
+            y: -20,
+            x: -80,
+          },
           {
             opacity: 1,
-            duration: 0.8,
-            delay: 0.3 * index,
-            x: 0,
             y: 0,
-            yoyo: true,
+            x: 0,
+            delay: 1,
             scrollTrigger: {
-              trigger: domElemnt,
-              start: `top bottom`,
-              end: `top 0%`,
-              toggleActions: "play reverse play reverse", // play on enter down, reset when leaving
+              trigger: mainTitleElement,
+              scrub: true,
+              start: `top 80%`,
+              end: `top 20%`,
+              toggleActions: "play reverse play reverse",
             },
           }
         );
+        highLightElements.forEach((domElemnt, index) => {
+          gsap.fromTo(
+            domElemnt,
+            { opacity: 0, x: -80, y: 40 },
+            {
+              opacity: 1,
+              duration: 0.8,
+              delay: 0.3 * index,
+              x: 0,
+              y: 0,
+              yoyo: true,
+              scrollTrigger: {
+                trigger: domElemnt,
+                start: `top bottom`,
+                end: `top 0%`,
+                toggleActions: "play reverse play reverse", // play on enter down, reset when leaving
+              },
+            }
+          );
+        });
       });
     },
     { flush: "post" }

@@ -40,10 +40,10 @@
 import { useResponsiveManager } from "../composables/useResponsiveManager";
 import Renderer from "../components/Renderer.vue";
 import gsap from "gsap";
-import { onMounted, ref, watchEffect } from "vue";
+import { onMounted, ref, watchEffect, nextTick } from "vue";
 import SlideView from "../components/SlideView.vue";
 import image from "@/assets/sample.jpeg";
-const { getSize, resolution } = useResponsiveManager();
+const { getSize } = useResponsiveManager();
 const slideData = ref({
   content: [
     {
@@ -88,28 +88,29 @@ onMounted(() => {
   const pageElement = document.querySelector(".project") as HTMLDivElement;
   watchEffect(
     () => {
-      const value = resolution.innerHeight;
-      gsap.fromTo(
-        pageElement,
-        {
-          opacity: 0,
-          y: -50,
-          x: 50,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          y: 0, // optional: move up while fading
-          duration: 0.5,
-          scrollTrigger: {
-            trigger: pageElement,
-            start: `50% 100%`, // element enters viewport bottom
-            end: `50% 50%`, // element reaches top
-            scrub: true, // smooth scroll-linked animation
-            toggleActions: "play reverse play reverse", // play on enter down, reset when leaving
+      nextTick(() => {
+        gsap.fromTo(
+          pageElement,
+          {
+            opacity: 0,
+            y: -50,
+            x: 50,
           },
-        }
-      );
+          {
+            opacity: 1,
+            x: 0,
+            y: 0, // optional: move up while fading
+            duration: 0.5,
+            scrollTrigger: {
+              trigger: pageElement,
+              start: `50% 100%`, // element enters viewport bottom
+              end: `50% 50%`, // element reaches top
+              scrub: true, // smooth scroll-linked animation
+              toggleActions: "play reverse play reverse", // play on enter down, reset when leaving
+            },
+          }
+        );
+      });
     },
     { flush: "post" }
   );
